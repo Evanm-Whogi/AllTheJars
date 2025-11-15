@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-accent: #FA4033;
+  --color-background: #171615;
+  --color-foreground: #262423;
+  --color-borders: #1C2226;
+  --color-muted: #C9CBCD;
+}
+* {
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-image: url('/images/background.svg');
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.hero-gradient {
+  background: linear-gradient(to right, white, var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
