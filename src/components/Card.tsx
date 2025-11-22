@@ -1,6 +1,6 @@
 import { CalendarIcon, ArrowTrendingUpIcon } from '@heroicons/react/24/solid';
 import { incrementDownloads } from '@/lib/actions';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getDaysAgo } from '@/lib/jarHelper';
 import { jarType } from '@/types/global';
 
@@ -35,8 +35,21 @@ export default function Card({id, name, type, category, version, releaseTime, ja
         }
     };
 
+    // Animations
+    const updateCursor = ({ x, y }: any) => {
+        document.documentElement.style.setProperty('--x', x)
+        document.documentElement.style.setProperty('--y', y)
+    }
+
+    useEffect(() => {
+        document.body.addEventListener('pointermove', updateCursor);
+        return () => {
+            document.body.removeEventListener('pointermove', updateCursor);
+        };
+    }, []);
     return (
-        <div className="p-4 group overflow-hidden shadow-2xl bg-foreground rounded-md transition-all duration-300 hover:-translate-y-1 border-border hover:shadow-[0_0_30px_theme(color.foreground)]">
+
+        <div className="p-4 group overflow-hidden shadow-2xl bg-foreground rounded-md cardAnim">
             <div className="space-y-3">
                 <div className="flex items-start justify-between">
                     <div className="flex-1">
