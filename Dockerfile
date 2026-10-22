@@ -1,11 +1,11 @@
 # Install dependencies only when needed
-FROM node:20-alpine AS deps
+FROM node:24.22.1-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm install --production=false
+RUN npm ci --no-audit --no-fund
 
 # Rebuild the source code only when needed
-FROM node:20-alpine AS builder
+FROM node:24.22.1-alpine AS builder
 WORKDIR /app
 
 ARG NEXT_PUBLIC_NAME
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Production image
-FROM node:20-alpine AS runner
+FROM node:24.22.1-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
